@@ -1,0 +1,11 @@
+- [Tournament configuration authority](tournament-configuration-authority.md) — server-selected stages and progression must remain the source of truth for both API and UI.
+- [Online multiplayer fallback](online-multiplayer-fallback.md) — an online match must fail visibly, never silently start a local game when matchmaking or identity is missing.
+- [Power Six persistence](power-six-persistence.md) — room configuration belongs in the database and per-player cycle counters belong in the serialized authoritative game state.
+- [Guest-first access](guest-first-access.md) — login is optional for general play; Deposit and Tournament participation remain protected actions.
+- [Fixed board perspective](fixed-board-perspective.md) — per-match visual remapping keeps canonical multiplayer coordinates and state untouched.
+- [Social system authority](social-system-authority.md) — server relationship/message permissions drive every profile, chat, notification, and real-time social surface.
+- [Android release identity](android-release-identity.md) — Android updates require the same package ID, signing keystore, alias, and published HTTPS backend target.
+- [APK download delivery](apk-download-delivery.md) — serve Android binaries with attachment headers from the published API; workspace asset cards may render APK bytes as text on mobile.
+- [Spectator socket lifecycle](spectator-socket-lifecycle.md) — clean spectator-only disconnects independently and keep Socket.IO subscriptions stable across UI rerenders.
+- [Spectator state authenticity](spectator-state-authenticity.md) — live spectator boards must render only authoritative server snapshots, never timer- or client-generated match state.
+- [Tournament winner coin send](tournament-winner-coin-send.md) — persisted admin toggle controls visibility; champion registration controls server-side transfer entitlement.

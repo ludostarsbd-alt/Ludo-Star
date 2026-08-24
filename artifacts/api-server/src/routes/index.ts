@@ -1,8 +1,46 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
+import tournamentRouter from "./tournament/index";
+import leagueRouter from "./tournament/league";
+import knockoutRouter from "./tournament/knockout";
+import liveTournamentRouter from "./tournament/live";
+import teamRouter from "./tournament/team";
+import playerRouter from "./player/index";
+import walletRouter from "./player/wallet";
+import gameRouter from "./game/index";
+import leaderboardRouter from "./leaderboard/index";
+import friendsRouter from "./friends/index";
+import chatRouter from "./chat/index";
+import dailyBonusRouter from "./daily-bonus/index";
+import notificationsRouter from "./notifications/index";
+import storeRouter from "./store/index";
+import nearbyRouter from "./nearby/index";
+import adminRouter from "./admin/index";
+import adminDepositRouter from "./admin/depositRequests";
+import depositRouter from "./deposit/index";
+import downloadRouter from "./download";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(tournamentRouter);
+router.use(leagueRouter);
+router.use(knockoutRouter);
+router.use(liveTournamentRouter);
+router.use(teamRouter);
+router.use(playerRouter);
+router.use(walletRouter);
+router.use(gameRouter);
+router.use(leaderboardRouter);
+router.use(friendsRouter);
+router.use(chatRouter);
+router.use(dailyBonusRouter);
+router.use(notificationsRouter);
+router.use(storeRouter);
+router.use(nearbyRouter);
+router.use(adminRouter);
+router.use(adminDepositRouter);
+router.use(depositRouter);
+router.use(downloadRouter);
 
 export default router;
