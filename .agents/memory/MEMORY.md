@@ -1,3 +1,4 @@
+- [Development schema sync](development-schema-sync.md) — preview API routes can fail when newly added Drizzle tables are not applied to the development database.
 - [Tournament configuration authority](tournament-configuration-authority.md) — server-selected stages and progression must remain the source of truth for both API and UI.
 - [Online multiplayer fallback](online-multiplayer-fallback.md) — an online match must fail visibly, never silently start a local game when matchmaking or identity is missing.
 - [Power Six persistence](power-six-persistence.md) — room configuration belongs in the database and per-player cycle counters belong in the serialized authoritative game state.
