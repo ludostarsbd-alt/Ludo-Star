@@ -35,12 +35,11 @@ import { notifyTournamentStageStarted } from "../../lib/tournament-live";
 
 const router: IRouter = Router();
 
-const PAYMENT_METHODS = ["bkash", "nagad", "rocket", "upay", "other"] as const;
+const PAYMENT_METHODS = ["bkash", "nagad", "rocket"] as const;
 const paymentSettingsSchema = z.object({
   bkashNumber: z.string().trim().regex(/^01[3-9]\d{8}$/, "Invalid bKash number").nullable(),
   nagadNumber: z.string().trim().regex(/^01[3-9]\d{8}$/, "Invalid Nagad number").nullable(),
   rocketNumber: z.string().trim().regex(/^01[3-9]\d{8}$/, "Invalid Rocket number").nullable(),
-  upayNumber: z.string().trim().regex(/^01[3-9]\d{8}$/, "Invalid Upay number").nullable(),
   otherInstructions: z.string().trim().max(500).nullable(),
   minDepositBDT: z.coerce.number().finite().min(1).max(100_000),
   maxDepositBDT: z.coerce.number().finite().min(1).max(1_000_000),
@@ -50,11 +49,11 @@ const paymentSettingsSchema = z.object({
   if (value.minDepositBDT > value.maxDepositBDT) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["maxDepositBDT"], message: "Maximum must be greater than minimum" });
   }
-  for (const method of value.enabledMethods) {
-    if (method !== "other" && !value[`${method}Number` as "bkashNumber" | "nagadNumber" | "rocketNumber" | "upayNumber"]) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [`${method}Number`], message: `${method} number is required when enabled` });
-    }
-  }
+   for (const method of value.enabledMethods) {
+     if (!value[`${method}Number` as "bkashNumber" | "nagadNumber" | "rocketNumber"]) {
+       ctx.addIssue({ code: z.ZodIssueCode.custom, path: [`${method}Number`], message: `${method} number is required when enabled` });
+     }
+   }
 });
 
 function sanitizePaymentSettings(row: any) {
@@ -62,7 +61,6 @@ function sanitizePaymentSettings(row: any) {
     bkashNumber: row?.bkashNumber ?? null,
     nagadNumber: row?.nagadNumber ?? null,
     rocketNumber: row?.rocketNumber ?? null,
-    upayNumber: row?.upayNumber ?? null,
     otherInstructions: row?.otherInstructions ?? null,
     minDepositBDT: String(row?.minDepositBDT ?? "10"),
     maxDepositBDT: String(row?.maxDepositBDT ?? "100000"),
@@ -168,7 +166,6 @@ router.patch("/admin/payment-settings", async (req, res): Promise<void> => {
       bkashNumber: data.bkashNumber || null,
       nagadNumber: data.nagadNumber || null,
       rocketNumber: data.rocketNumber || null,
-      upayNumber: data.upayNumber || null,
       otherInstructions: data.otherInstructions || null,
       minDepositBDT: data.minDepositBDT.toFixed(2),
       maxDepositBDT: data.maxDepositBDT.toFixed(2),
@@ -183,7 +180,6 @@ router.patch("/admin/payment-settings", async (req, res): Promise<void> => {
         bkashNumber: data.bkashNumber || null,
         nagadNumber: data.nagadNumber || null,
         rocketNumber: data.rocketNumber || null,
-        upayNumber: data.upayNumber || null,
         otherInstructions: data.otherInstructions || null,
         minDepositBDT: data.minDepositBDT.toFixed(2),
         maxDepositBDT: data.maxDepositBDT.toFixed(2),

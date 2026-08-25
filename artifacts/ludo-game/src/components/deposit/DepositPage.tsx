@@ -21,15 +21,12 @@ const METHODS = [
   { id: 'bkash',  label: 'bKash',    color: '#E2136E' },
   { id: 'nagad',  label: 'Nagad',    color: '#F05A28' },
   { id: 'rocket', label: 'Rocket',   color: '#8B5CF6' },
-  { id: 'upay',   label: 'Upay',     color: '#0EA5E9' },
-  { id: 'other',  label: 'অন্যান্য', color: '#6B7280' },
 ] as const;
 
 type PaymentSettings = {
   bkashNumber: string | null;
   nagadNumber: string | null;
   rocketNumber: string | null;
-  upayNumber: string | null;
   otherInstructions: string | null;
   minDepositBDT: string;
   maxDepositBDT: string;
@@ -40,11 +37,10 @@ const DEFAULT_SETTINGS: PaymentSettings = {
   bkashNumber: null,
   nagadNumber: null,
   rocketNumber: null,
-  upayNumber: null,
   otherInstructions: null,
   minDepositBDT: '10',
   maxDepositBDT: '100000',
-  enabledMethods: ['bkash', 'nagad', 'rocket', 'upay', 'other'],
+  enabledMethods: ['bkash', 'nagad', 'rocket'],
 };
 
 const STATUS_MAP = {
@@ -247,7 +243,7 @@ export function DepositPage({ onBack }: Props) {
               <div className="mt-3 space-y-1">
                 {availableMethods.map((m) => {
                   const number = paymentSettings[`${m.id}Number` as keyof PaymentSettings];
-                  if (m.id === 'other' || typeof number !== 'string' || !number) return null;
+                   if (typeof number !== 'string' || !number) return null;
                   return (
                     <div key={`${m.id}-number`} className="flex items-center justify-between rounded-xl px-3 py-2 text-xs"
                       style={{ background: `${m.color}18`, border: `1px solid ${m.color}35` }}>

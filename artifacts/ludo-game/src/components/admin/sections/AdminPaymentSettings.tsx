@@ -8,15 +8,12 @@ const METHODS = [
   ['bkash', 'bKash'],
   ['nagad', 'Nagad'],
   ['rocket', 'Rocket'],
-  ['upay', 'Upay'],
-  ['other', 'অন্যান্য'],
 ] as const;
 
 type Settings = {
   bkashNumber: string | null;
   nagadNumber: string | null;
   rocketNumber: string | null;
-  upayNumber: string | null;
   otherInstructions: string | null;
   minDepositBDT: string;
   maxDepositBDT: string;
@@ -28,11 +25,10 @@ const EMPTY: Settings = {
   bkashNumber: '',
   nagadNumber: '',
   rocketNumber: '',
-  upayNumber: '',
   otherInstructions: '',
   minDepositBDT: '10',
   maxDepositBDT: '100000',
-  enabledMethods: ['bkash', 'nagad', 'rocket', 'upay', 'other'],
+  enabledMethods: ['bkash', 'nagad', 'rocket'],
   coinSendEnabled: false,
 };
 
@@ -53,7 +49,6 @@ async function saveSettings(settings: Settings): Promise<{ settings: Settings }>
       bkashNumber: settings.bkashNumber?.trim() || null,
       nagadNumber: settings.nagadNumber?.trim() || null,
       rocketNumber: settings.rocketNumber?.trim() || null,
-      upayNumber: settings.upayNumber?.trim() || null,
       otherInstructions: settings.otherInstructions?.trim() || null,
       minDepositBDT: Number(settings.minDepositBDT),
       maxDepositBDT: Number(settings.maxDepositBDT),
@@ -140,7 +135,7 @@ export function AdminPaymentSettings() {
           </p>
         </div>
         <div className="grid sm:grid-cols-2 gap-3">
-          {(['bkashNumber', 'nagadNumber', 'rocketNumber', 'upayNumber'] as const).map((key) => (
+           {(['bkashNumber', 'nagadNumber', 'rocketNumber'] as const).map((key) => (
             <label key={key} className="space-y-1">
               <span className="text-white/50 text-xs font-medium">{key.replace('Number', '')} নম্বর</span>
               <input value={form[key] ?? ''} onChange={(event) => update(key, event.target.value)} placeholder="01XXXXXXXXX"

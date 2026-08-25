@@ -295,6 +295,15 @@ router.post("/store/coin-purchase", async (req, res): Promise<void> => {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 router.post("/store/order/initiate", async (req, res): Promise<void> => {
+  res.status(410).json({
+    error: "Automated payment gateways are disabled. Use the manual bKash, Nagad, or Rocket deposit flow.",
+  });
+  return;
+
+  /*
+   * Legacy automated gateway implementation intentionally disabled.
+   * Manual deposits are the only supported payment flow.
+   *
   const userId = requireAuth(req, res);
   if (!userId) return;
 
@@ -403,6 +412,7 @@ router.post("/store/order/initiate", async (req, res): Promise<void> => {
     // Instructions for the client
     nextStep: `Redirect the user to paymentUrl. Poll GET /api/store/order/${orderId} for status.`,
   });
+  */
 });
 
 /* ═══════════════════════════════════════════════════════════════════════════

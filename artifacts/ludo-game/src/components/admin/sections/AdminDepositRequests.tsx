@@ -12,7 +12,7 @@ const STATUS_MAP = {
 };
 
 const METHOD_COLORS: Record<string, string> = {
-  bkash: '#E2136E', nagad: '#F05A28', rocket: '#8B5CF6', upay: '#0EA5E9', other: '#6B7280',
+  bkash: '#E2136E', nagad: '#F05A28', rocket: '#8B5CF6',
 };
 
 async function fetchRequests(status: string, offset: number) {

@@ -21,7 +21,7 @@ export const paymentSettingsTable = pgTable("payment_settings", {
     .default("100000"),
   enabledMethods: jsonb("enabled_methods")
     .notNull()
-    .default(["bkash", "nagad", "rocket", "upay", "other"]),
+    .default(["bkash", "nagad", "rocket"]),
   coinSendEnabled: boolean("coin_send_enabled").notNull().default(false),
   updatedBy: text("updated_by"),
   updatedAt: timestamp("updated_at", { withTimezone: true })

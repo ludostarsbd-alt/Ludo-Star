@@ -21,11 +21,10 @@ const DEFAULT_PAYMENT_SETTINGS = {
   bkashNumber: null,
   nagadNumber: null,
   rocketNumber: null,
-  upayNumber: null,
   otherInstructions: null,
   minDepositBDT: "10",
   maxDepositBDT: "100000",
-  enabledMethods: ["bkash", "nagad", "rocket", "upay", "other"],
+  enabledMethods: ["bkash", "nagad", "rocket"],
 };
 
 function publicPaymentSettings(row: typeof DEFAULT_PAYMENT_SETTINGS | any) {
@@ -33,7 +32,6 @@ function publicPaymentSettings(row: typeof DEFAULT_PAYMENT_SETTINGS | any) {
     bkashNumber: row.bkashNumber ?? null,
     nagadNumber: row.nagadNumber ?? null,
     rocketNumber: row.rocketNumber ?? null,
-    upayNumber: row.upayNumber ?? null,
     otherInstructions: row.otherInstructions ?? null,
     minDepositBDT: String(row.minDepositBDT ?? DEFAULT_PAYMENT_SETTINGS.minDepositBDT),
     maxDepositBDT: String(row.maxDepositBDT ?? DEFAULT_PAYMENT_SETTINGS.maxDepositBDT),
@@ -82,7 +80,7 @@ router.post("/store/deposit/manual", async (req, res): Promise<void> => {
     res.status(400).json({ error: `amountBDT must be between ${minDeposit} and ${maxDeposit} BDT` });
     return;
   }
-  const VALID_METHODS = ["bkash", "nagad", "rocket", "upay", "other"];
+  const VALID_METHODS = ["bkash", "nagad", "rocket"];
   if (!paymentMethod || !VALID_METHODS.includes(paymentMethod)) {
     res.status(400).json({ error: `paymentMethod must be one of: ${VALID_METHODS.join(", ")}` });
     return;

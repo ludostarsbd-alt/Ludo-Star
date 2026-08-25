@@ -30,7 +30,7 @@ export const manualDepositRequestsTable = pgTable(
     /** How much the user claims to have sent (in BDT). */
     amountBDT: numeric("amount_bdt", { precision: 10, scale: 2 }).notNull(),
 
-    /** bKash | Nagad | Rocket | Upay | other */
+    /** bKash | Nagad | Rocket */
     paymentMethod: text("payment_method").notNull(),
 
     /** The user's own number they sent FROM */
@@ -73,8 +73,6 @@ export const PAYMENT_METHODS = [
   { id: "bkash",  label: "bKash",  color: "#E2136E", emoji: "💗" },
   { id: "nagad",  label: "Nagad",  color: "#F05A28", emoji: "🧡" },
   { id: "rocket", label: "Rocket", color: "#8B5CF6", emoji: "💜" },
-  { id: "upay",   label: "Upay",   color: "#0EA5E9", emoji: "💙" },
-  { id: "other",  label: "অন্যান্য", color: "#6B7280", emoji: "💳" },
 ] as const;
 
 export type PaymentMethodId = (typeof PAYMENT_METHODS)[number]["id"];
