@@ -10,3 +10,4 @@
 - [Spectator socket lifecycle](spectator-socket-lifecycle.md) — clean spectator-only disconnects independently and keep Socket.IO subscriptions stable across UI rerenders.
 - [Spectator state authenticity](spectator-state-authenticity.md) — live spectator boards must render only authoritative server snapshots, never timer- or client-generated match state.
 - [Tournament winner coin send](tournament-winner-coin-send.md) — persisted admin toggle controls visibility; champion registration controls server-side transfer entitlement.
+- [GitHub publishing limits](github-publishing-limits.md) — paced API writes or authenticated Git push are safer for large repository snapshots.
